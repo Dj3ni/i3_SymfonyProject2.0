@@ -5,7 +5,10 @@ namespace App\Entity;
 use App\Trait\HydrateTrait;
 use App\Repository\AddressRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+//use ApiPlatform\Cors\Annotation\ApiResource;
 
+#[ApiResource()]
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
 class Address
 {
