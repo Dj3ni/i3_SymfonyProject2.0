@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EventController!{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
+
+<header>
+    <h1>All the results for your search </h1>
+</header>
+
+<div class = "div-btn">
+    <button class="btn btn-primary btn-block">
+        <a href=" {{ path ('event_search')}} ">Back to search page</a>
+    </button>
+    {% if is_granted ("ROLE_ADMIN") %}
+    <button class= "btn btn-primary btn-block">
+        <a href="{{ path ('create_event')}}">Create new event</a>
+    </button>
+    {% endif %}
+</div>
+
+<div id ="SearchResult" class = "card-section">
+{# In controller: if no research put all the events #}
+    
+        {% for event in events %}
+            <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ path ('event',{id:event.id})}}">
+                        {{event.title}}
+                    </a>
+                </h5>
+                <div class ="card-type">
+                    <h6 class="card-subtitle mb-2 text-body-secondary">{{event.eventType.value}}</h6>
+                    <img src="/images/{{event.eventType.value}}.png" alt="{{event.eventType.value}}">
+                </div >
+                <hr class="hr-xs">
+                <p class="card-text">{{event.description}}</p>
+                <div class = "card-link-div">
+                    <a href="{{path ("event", {id: event.id})}}" class="card-link">More info</a>
+                    <a href="{{ path ("event_subscription", {id:event.id})}}" class="card-link">Subscribe</a>
+                    {% if is_granted("ROLE_ADMIN") %}
+                    <br>
+                        <a href="{{ path ('update_event', {id:event.id})}}"class="card-link">✏️</a>
+                        <a href="{{ path ('delete_event', {id:event.id})}}"class="card-link">❌</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+{% endblock %}

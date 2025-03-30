@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact us{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
+
+<div class="login-block">
+    <h1>For further informations, please contact us:</h1>
+
+    {{ form_errors(form) }}
+
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_widget(form.name) }}
+    </div>
+    <hr class = "hr-xs">
+    <div class="form-group">
+        {{ form_widget(form.email) }}
+    </div>
+    <hr class = "hr-xs">
+    <div class="form-group">
+        {{ form_widget(form.message) }}
+    </div>
+    <hr class = "hr-xs">
+    <br>
+    {{ form_end(form) }}
+</div>   
+{% endblock %}

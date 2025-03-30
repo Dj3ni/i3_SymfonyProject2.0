@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HomePage{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
+
+<header>
+{% if app.user %}
+<h1>Welcome {{app.user.firstname}}</h1>
+{% else %}
+    <h1>Welcome</h1>
+{% endif %} 
+</header>
+
+<h2>About</h2>
+
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo, nisi laborum. Numquam sit ipsa delectus nostrum, consectetur quibusdam eius voluptate quos, consequuntur, veritatis minima laudantium magni facere! Excepturi, iusto minima!
+Accusamus hic sapiente deserunt sequi ex repellat magni quas obcaecati! Blanditiis sapiente enim nisi quae accusamus reprehenderit ut architecto aut alias in soluta ipsum vero, esse ipsa doloremque inventore maiores.</p>
+
+<div class = "card-section">
+    
+    {% for event in lastEvents %}
+    {# {% if event.dateStart >= "now"|date %} #}
+    <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ path ('event',{id:event.id})}}">
+                        {{event.title}}
+                    </a>
+                </h5>
+                <div class ="card-type">
+                    <h6 class="card-subtitle mb-2 text-body-secondary">{{event.eventType.value}}</h6>
+                    <img src="/images/{{event.eventType.value}}.png" alt="{{event.eventType.value}}">
+                </div >
+                <hr class="hr-xs">
+                <p class="card-text">{{event.description}}</p>
+                <div class = "card-link-div">
+                    <a href="{{path ("event", {id: event.id})}}" class="card-link">More info</a>
+                    <a href="{{ path ("event_subscription", {id:event.id})}}" class="card-link">Subscribe</a>
+                    {% if is_granted("ROLE_ADMIN") %}
+                    <br>
+                        <a href="{{ path ('update_event', {id:event.id})}}"class="card-link">✏️</a>
+                        <a href="{{ path ('delete_event', {id:event.id})}}"class="card-link">❌</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {# {% endif %} #}
+    {% endfor %}
+
+</div>
+{% endblock %}

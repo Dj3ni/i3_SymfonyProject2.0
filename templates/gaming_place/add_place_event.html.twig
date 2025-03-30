@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Link event and gamingPlace{% endblock %}
+
+{% block body %}
+
+
+    <header>
+        <h1>Create a new Gaming Place</h1>
+    </header>
+
+    {{ form_errors(form) }}
+<div class="login-block">
+    {{ form_start(form) }}
+
+    <div class= "form-group">
+
+        <h1>Add a new gaming place</h1>
+        {# choice between existing and new #}
+            <div> 
+                {{form_widget(form.gamingPlaceChoice)}}
+            </div>
+
+            {# select Gaming place #}
+            <div>
+                {{form_row(form.gamingPlace)}}
+            </div>
+            {# Create a new gaming place #}
+            <div class = "gaming-place-new">
+                {{ form_widget(form.newGamingPlace.name)}}
+                <hr class="hr-xs">
+                {{ form_row(form.newGamingPlace.type)}}
+                {{ form_row(form.newGamingPlace.placeMax)}}
+                {{ form_widget(form.newGamingPlace.description)}}
+                <hr class="hr-xs">
+                <br>
+                <h1>Address</h1>
+                {{ form_widget(form.newGamingPlace.address.locality)}}
+                <hr class="hr-xs">
+                {{ form_widget(form.newGamingPlace.address.street)}}
+                <hr class="hr-xs">
+                {{ form_widget(form.newGamingPlace.address.number)}}
+                <hr class="hr-xs">
+                {{ form_widget(form.newGamingPlace.address.postCode)}}
+                <hr class="hr-xs">
+                {{ form_widget(form.newGamingPlace.address.city)}}
+                <hr class="hr-xs">
+                {{ form_widget(form.newGamingPlace.address.country)}}
+                <hr class="hr-xs">
+            </div>
+    </div>
+    <button type="submit">Create a new gaming place</button>
+        {# {{ form_widget (form.save)}} #}
+        <br>
+        {{form_end (form)}}
+    {# {{ form_end(form,{'render_rest': false}) }} #}
+</div>
+
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+    {{encore_entry_script_tags ('eventForm')}}
+{% endblock %}

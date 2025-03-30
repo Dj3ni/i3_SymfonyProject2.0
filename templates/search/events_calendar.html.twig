@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events calendar{% endblock %}
+
+{% block body %}
+
+<header>
+    <h1>Events Calendar</h1>
+</header>
+
+<div class = "div-btn">
+    <button class ="btn btn-primary btn-block">
+        <a href="{{ path ('event_search')}}">Back to search page</a>
+    </button>
+    {% if is_granted ("ROLE_ADMIN") %}
+        <button class = "btn btn-primary btn-block">
+            <a href="{{ path ('create_event')}}">Create new event</a>
+        </button>
+    {% endif %}
+</div>
+{# calendrier #}
+
+<div id="calendrier"
+    class="calendar"  
+    data-roles = "
+    {% if app.user %}
+        {{app.user.roles |json_encode()}}
+    {% else %} 
+        {{ [] | json_encode() }}
+    {% endif %}"
+    data-calendrier="{{ occurrencesJson }}"  
+    {% for event in events %}
+        data-events-url="{{ path('event',{"id":event.id}) }}"
+    {% endfor %}>
+</div>
+
+{# {{ dump(eventsJson) }} #}
+
+{# Map #}
+<div id = "map">
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('calendar') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('calendar') }}
+{% endblock %}
+

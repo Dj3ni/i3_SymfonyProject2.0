@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:400,900&display=swap');
+
+#calendrier {
+    margin: auto;
+    width: 90%;
+    height: auto;
+    box-shadow:rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 20px;
+    cursor:pointer;
+}
+
+.fc-toolbar h2,
+.fc th {
+    font-weight: inherit;
+    overflow: hidden;
+} 
+
+#calendrier button {
+    background-color: #1a1a1a;
+}
+
+.fc-daygrid-day-number,
+.fc-col-header-cell-cushion {
+    text-decoration: none;
+    color: #525252;
+}
+
+.fc-daygrid-day-number:hover {
+    background-color: #525252 ;
+    color: #fff;
+    border-radius: 20px;
+}
+
+
+.no-hover:hover {
+    background-color: red !important; /* Override hover effect */
+}
+
+.fc-list-event-graphic {
+    overflow: hidden;
+}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event infos{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
+
+<header>
+    <h1>
+        Delete: {{event.title}}
+    </h1>
+</header>
+
+<div class = "login-block">
+    <p>Do you want to delete the event "<strong>{{ event.title }}</strong>" and all of his occurrences or only occurrences?
+    </p>
+
+    <form action="" method="post" >
+        <button type="submit" name="action" value="delete_event" class="btn btn-danger ">Delete Event and Occurrences</button>
+        <button type="submit" name="action" value="delete_occurrences" class="btn btn-warning">Delete Only Occurrences</button>
+    </form>
+    </div>
+
+<div class = "div-btn">
+    <button class = "btn btn-primary btn-block">
+        <a href=" {{ path ("event", {id: event.id})}}">Cancel</a>
+    </button>
+</div>
+
+
+{% endblock %}

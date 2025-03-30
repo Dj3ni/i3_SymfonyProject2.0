@@ -1,0 +1,49 @@
+.event-content {
+    display:grid;
+    grid: 80% / 40% 60%;
+    box-shadow:rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin-bottom: 15px;
+}
+
+.grid-item {
+    padding: 15px;
+}
+
+.event-type {
+    display: inline-flex;
+    justify-content: flex-start;
+    height: 40px;
+    width:50%;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.event-type img {
+    max-width: 40px;
+    margin-left: 15px;
+}
+
+.event-type p {
+    margin: 0;
+}
+
+.event-description {
+    box-shadow:rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 15px;
+}
+
+.event-description ul li {
+    list-style: none;
+}
+
+/**************** Google Map *************/
+
+/* #map {
+    width: 80%;
+    height: 500px;
+} */
+
+.grid-item iframe {
+    width: 100%;
+    margin: auto;
+}

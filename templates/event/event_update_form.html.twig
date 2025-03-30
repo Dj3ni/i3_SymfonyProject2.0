@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update{% endblock %}
+
+{% block body %}
+
+
+    <header>
+        <h1>Update: {{event.title}} </h1>
+    </header>
+
+    {{ form_errors(form) }}
+<div class="login-block">
+    {{ form_start(form) }}
+        <div class="form-group">
+            <h1>Event info</h1>
+            {{ form_row(form.title) }}
+            {{ form_row(form.dateStart) }}
+            {{ form_row(form.dateEnd) }}
+            {{ form_row(form.recurrenceType) }}
+            {{ form_row(form.recurrenceEnd) }}
+            {{ form_row(form.eventType) }}
+            {{ form_row(form.fee)}}
+            {{ form_row(form.description) }}
+        </div>
+        {# <div class="form-group">
+        <h1>Gaming Places</h1>
+            {% for eventPlace in form.eventPlaces %}
+                {{ form_row(eventPlace)}}
+            {% endfor %} 
+        </div> #}
+
+        {# <button type="submit" class="btn">Update</button> #}
+    {{ form_end(form) }}
+</div>
+{% endblock %}

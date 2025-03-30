@@ -1,0 +1,332 @@
+/* @import url('https://fonts.googleapis.com/css?family=Muli:400,900&display=swap');
+ */
+
+body {
+    margin:0;
+    font-family: "Poppins", sans-serif;
+}
+
+main {
+    padding: 15px;
+}
+
+.btn a{
+    color:#fff;
+    text-decoration: none;
+    margin:15px;
+}
+.btn{
+    margin: 15px;
+    background-color:#525252 ;
+    border-color: #525252;
+}
+
+.btn-danger{
+    margin: 15px;
+    background-color: red !important;
+}
+
+.btn-warning{
+    margin: 15px;
+    background-color: yellow !important;
+}
+
+.btn:hover{
+    background-color: #96a2b2;
+    border-color: #525252;
+
+}
+
+.div-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    text-align: center;
+    padding: 15px;
+    margin: 5px 15px 15px 15px;
+}
+
+/************************ Nav Header *****************/
+.header-nav{
+    width: 100%;
+    background: #eceaff;
+    color: #525252;
+    
+}
+
+nav {
+    background: #1a1a1a;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10%;
+    position: relative;
+}
+
+/* navbar */
+.navbar{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.navbar a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #fff;
+    transition-duration: 0.5s;
+}
+
+.navbar a:hover {
+    background-color: #525252;
+    /* background-color: #fff; */
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+/* logo */
+.logo a img {
+    width: 150px;
+}
+
+/* avatar*/
+
+.avatar {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    
+}
+
+/* Submenu */
+
+/* When toggle hidden */
+
+.sub-menu-wrap {
+    position: absolute;
+    z-index: 1000;
+    top: 80%;
+    right: 2%;
+    width: 320px;
+    max-height: 0px ;
+    overflow: hidden;
+    transition: max-height 0.5s;
+    box-shadow: 5px 5px 15px rgba(52,52,52,0.25);
+    /* To hide submenu: add max-height: 0 and overflow: hidden , to make it visible, max-height: 400 px, and transition*/
+}
+
+/* When toggle open */
+.sub-menu-wrap.open-menu {
+    max-height: 400px;
+    z-index: 1000;
+}
+
+.sub-menu {
+    background: #fff;
+    padding: 20px;
+    margin: 10px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info h3 {
+    font-weight: 500;
+}
+
+.user-info img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.sub-menu hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: #ccc;
+    margin: 15px 0 10px ;
+}
+
+.sub-menu-link {
+    display: flex;
+    align-items: center;
+    /* vertical-align: middle; */
+    text-decoration: none;
+    color: #525252;
+    margin:12px 0 ;
+}
+
+.sub-menu-link p {
+    width: 100%;
+}
+
+.sub-menu-link span {
+    font-size: 22px;
+    transition: transform 0.5s;
+}
+
+.sub-menu-link img {
+    width: 45px;
+    background: #e5e5e5;
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 15px;
+}
+
+.sub-menu-link:hover span {
+    transform: translateX(5px);
+}
+
+.sub-menu-link:hover p{
+    font-weight: bolder;
+}
+
+ /************************** Login Form ***************/ 
+
+.login-block {
+    background-color:#fff;
+    padding:60px;
+    box-shadow:rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    text-align:center;
+    border-radius:5px;
+    width: 75%;
+    margin: auto;
+}
+
+.login-block h1
+{
+    font-family:Open Sans,sans-serif;
+    color:#96a2b2;
+    letter-spacing:1px;
+    font-size:22px;
+    margin-bottom:60px;
+}
+
+.login-block .form-group
+{
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+.login-block .form-control,.login-block .form-control:focus,.login-block .input-group-addon,.login-block .input-group-addon:focus
+{
+    background-color:transparent;
+    border:none;
+}
+.login-block .form-control
+{
+    font-size:17px;
+    border-radius:0px;
+}
+
+.login-block .input-group-addon
+{
+    color:#525252;
+    font-size:19px;
+    opacity:.5
+}
+.login-block .btn-block
+{
+    margin-top:30px;
+    padding:15px;
+    background-color:#525252 ;
+    border-color: #525252;
+}
+.login-block .hr-xs
+{
+    margin-top:5px;
+    margin-bottom:5px
+}
+
+/*************** Nav filters ********************/
+
+.navbar img {
+    max-width: 40px;
+    color: grey;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.type-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/************************ Searchbar ********************/
+.search-div-container{
+    width: 100%;
+    margin: 5px 5px 15px 5px;
+}
+
+.search-links {
+    margin-right: 15px;
+}
+.search-links a{
+    margin: 5px;
+    text-decoration: none;
+    color: #525252;
+    transition-duration: 0.5s;
+}
+
+.search-links a:hover {
+    background-color: #525252;
+    color: #ffff;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.search-div {
+    width: 50%; 
+    margin-left: 2%;
+    display: flex;
+    align-items: center;
+    /* padding: 10px; */
+}
+
+#SearchForm {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#search_form_search {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#SearchIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.search-div-container {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+

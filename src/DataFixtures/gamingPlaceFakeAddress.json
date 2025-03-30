@@ -1,0 +1,133 @@
+[
+    {   
+        "name":"La Scep Bar",
+        "description": "Cocktail Bar",
+        "address":{
+            "street": "Rue Charles Sambon",
+            "number": "21",
+            "postCode": 1300,
+            "city": "Wavre",
+            "lat": 50.7161381,
+            "lon": 4.6109262
+        }
+    },
+    {
+        "name":"Citizen Kane Louvain-la-Neuve",
+        "description": "Resto-bar events",
+        "address":{
+            "street": "Scavée du Biéreau",
+            "number": "2",
+            "postCode": 1348,
+            "city": "Louvain-la-Neuve",
+            "lat": 50.6663786,
+            "lon": 4.6162261
+        }
+    },
+
+    {
+        "name":"Les Idées Bleues",
+        "description": "Magasin de jeux et jouets",
+        "address":{
+            "street": "Chaussée de Louvain",
+            "number": "149",
+            "postCode": 1300,
+            "city": "Wavre",
+            "lat": 50.723384857177734,
+            "lon": 4.631505966186523
+        }
+    },
+    {
+        "name":"Espace CBO",
+        "description": "Volunteer organisation",
+        "address": {
+            "street": "Chaussée de Jette",
+            "number": "407",
+            "postCode": 1090,
+            "city": "Jette",
+            "lat": 50.8667,
+            "lon": 4.3333
+        }
+    },
+    {
+        "name":"Muntpunt",
+        "description": "Boardgame Library",
+        "address":{
+            "street": "Place de la Monnaie",
+            "number": "6",
+            "postCode": 1000,
+            "city": "Bruxelles",
+            "lat": 50.849937438964844,
+            "lon": 4.353485107421875
+        }
+    },
+
+    {
+        "name":"Chacolathé",
+        "description": "Bar à chats",
+        "address":{
+            "street": "Avenue Roi Albert",
+            "number": "62",
+            "postCode": 5300,
+            "city": "Andennes",
+            "lat": 50.49227523803711,
+            "lon": 5.101298809051514
+        }
+    },
+
+    {
+        "name": "Les jardins de l'Hospice",
+        "description": "Espace jardins - bar - events",
+        "address":{
+            "locality": "Grand Hospice",
+            "street": "Rue du Grand Hospice",
+            "number": "7",
+            "postCode": 1000,
+            "city": "Bruxelles",
+            "lat": 50.8538971,
+            "lon": 4.3502264
+        }
+    },
+
+    {
+
+        "name":"Parc d'Enghien",
+        "description": "Espace jardins - bar - events",
+        "address":{
+            "locality": "Château d'Enghien",
+            "street": "Avenue Elisabeth",
+            "number": "",
+            "postCode": 7850,
+            "city": "Enghien",
+            "lat": 50.6937998,
+            "lon": 4.0430238
+        }
+    },
+
+    {
+        "name":"Gymnase Eric Tabarly",
+        "description": "Espace jardins - bar - events",
+        "address":{
+            "street": "Rue Emile Cloud",
+            "number": "47",
+            "postCode": 77700,
+            "country": "France",
+            "city": "Serris",
+            "lat": 48.850649,
+            "lon": 2.7861272
+        }
+    },
+
+    {
+        "name":"The E.G.G Brussels",
+        "description": "Espace jardins - bar - events",
+        "address":{
+            "street": "Rue Bara",
+            "number": "175",
+            "postCode": 1070,
+            "city": "Bruxelles",
+            "lat": 50.8329204,
+            "lon": 4.3275132
+        }
+    }
+
+]

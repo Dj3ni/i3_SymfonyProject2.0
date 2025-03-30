@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events calendar{% endblock %}
+
+{% block body %}
+
+<header>
+    <h1>My subscriptions</h1>
+</header>
+
+{% if subscriptions is empty %}
+    <p>You don't have any subscriptions for the moment</p>
+
+    {% else %}
+        {# {{ dump(subscriptions)}} #}
+        {% for subscription in subscriptions %}
+        
+            <li>
+            {{subscription.eventOccurrence.event.title}}: 
+                {{subscription.eventOccurrence.dateStart | date("d-m-y H:i")}},
+                    for {{subscription.numberParticipants}} participants
+                    <a href="{{ path ("event_subscription", {"id":subscription.eventOccurrence.event.id})}}">✏️</a>
+            </li>
+        {% endfor %}
+
+{% endif %}
+
+{% endblock %}
+
+

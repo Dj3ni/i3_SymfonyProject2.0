@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Occurrences de l'événement: {{ event.title }}</h1>
+
+<ul>
+    {% for occurrence in occurrences %}
+        <li>{{ occurrence.startDate|date('d-m-Y H:i') }} - {{ occurrence.endDate|date('d-m-Y H:i') }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

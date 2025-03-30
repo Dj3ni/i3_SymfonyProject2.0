@@ -1,0 +1,88 @@
+<html>
+    <body>
+        <div class="header-nav">
+            <nav>
+                <div class ="logo">
+                    <a href="{{ path ('home')}}">
+                        <img src="/images/logoipsum-white.png" alt="logoipsum">
+                    </a>
+                </div>
+                <div class="navbar">
+                    <a href="{{ path ('home')}}">Home</a>
+                    <a href="{{ path ('event_search')}}">Events</a>
+                    <a href="{{ path ('contact')}}">Contact</a>
+                    {# For debug subMenu #}
+                    {# <a href="{{ path ('app_login')}}">Login</a>
+                    <a href="{{ path ('app_logout')}}">Logout</a> #}
+                </div>
+                <div class="avatar">
+                    {% if app.user and app.user.avatar is not null %}
+                        <img src=" {{ vich_uploader_asset(app.user,"avatarFile")}}" alt="avatar">
+                    {% else %}
+                        <img src="/images/defaultAvatar.jpg" alt="defaultAvatar">
+                    {% endif %}
+                    {% if app.user %}
+                        <p>{{app.user.firstname}}</p>
+                    {% else %}
+                        <p>Guest</p>
+                    {% endif %}
+                </div>
+                <div class="sub-menu-wrap" id= "subMenu">
+                    <div class="sub-menu">
+                        <div class="user-info">
+                            {% if app.user and app.user.avatar is not null %}
+                                <img src="{{ vich_uploader_asset(app.user,"avatarFile")}}" alt="avatar">
+                            {% else %}
+                                <img src="/images/defaultAvatar.jpg" alt="defaultAvatar">
+                            {% endif %}
+                            {% if app.user %}
+                                <p>{{app.user.firstname}}</p>
+                            {% else %}
+                                <h3>Guest</h3>
+                            {% endif %}
+                        </div>
+                        <hr>
+                        
+                        {% if app.user %}
+                            <a href="{{ path ('app_logout')}}" class = "sub-menu-link">
+                                <img src="/images/logout.png" alt="logout">
+                                <p>Logout</p>
+                                <span>></span>
+                            </a>
+                            <a href=" {{ path ('user_profile')}}" class = "sub-menu-link">
+                                <img src="/images/defaultAvatar.jpg" alt="profile">
+                                <p>My Profile</p>
+                                <span>></span>
+                            </a>
+                            <a href=" {{ path ('user_calendar')}}" class = "sub-menu-link">
+                                <img src="/images/calendar.png" alt="personal Calendar">
+                                <p>My Calendar</p>
+                                <span>></span>
+                            </a>
+                            <a href="{{path ('user_subscriptions')}}" class = "sub-menu-link">
+                                <img src="/images/register.png" alt="personal subscriptions">
+                                <p>My Subscriptions</p>
+                                <span>></span>
+                            </a>
+
+
+                        {% else %}
+                        <a href="{{ path ('app_login')}}" class = "sub-menu-link">
+                            <img src="/images/login.png" alt="login">
+                            <p>Login</p>
+                            <span>></span>
+                        </a>
+                        <a href="{{ path ('register')}}" class = "sub-menu-link">
+                            <img src="/images/register.png" alt="register">
+                            <p>Sign Up</p>
+                            <span>></span>
+                        </a>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+                
+            </nav>
+        </div>
+    </body>
+</html>

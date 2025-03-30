@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    <header>
+        <h1>Subscribe to: {{event.title}}</h1>
+    </header>
+
+<div class="login-block">
+    {{ form_errors(form) }}
+
+    {{ form_start(form) }}
+    <div>
+        
+        {% for form in form.eventOccurrenceSubscriptions %}
+            <div class = "form-group">
+                {# date #}
+                    <h4>From {{ form.vars.data.eventOccurrence.dateStart|date('d-m-y H:i') }}
+                        To
+                        {{ form.vars.data.eventOccurrence.dateEnd|date('d-m-y H:i') }}
+                    </h4>
+                {# mini form #}
+                <div class="form-input-group">
+                    {{ form_row(form.numberParticipants) }}
+                </div>
+                    {# if user subscribed checkbox checked #}
+                <div class="form-input-group">
+                    {{ form_row(form.subscribe, { "checked": form.vars.data.id ? "checked" : ''}) }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="div-btn">
+        <button class="btn btn-primary btn-block">Save subscriptions</button>
+    </div>
+    
+    {{ form_end(form) }}
+</div>
+{% endblock %}

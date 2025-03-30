@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events Map{% endblock %}
+
+{% block body %}
+
+<header>
+    <h1>Events Map</h1>
+</header>
+
+<div class = "div-btn">
+    <button class ="btn btn-primary btn-block">
+        <a href="{{ path ('event_search')}}">Back to search page</a>
+    </button>
+</div>
+
+<div class="event-content">
+    <div class="grid-item">
+        <h2>Events Addresses</h2>
+        
+        <ul>
+            {% for event in events %}
+                <li>{{event.title}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="grid-item">
+        <div id="allEventsMap" style="height: 500px; border: 2px solid black; z-index: index 1;
+"></div>
+    </div>
+</div>
+
+<div class="event-content">
+    <div class="grid-item">
+        <h2>Gaming Places Addresses</h2>
+        
+        <ul>
+        
+            {% for gamingPlace in gamingPlaces[:10] %}
+                <li>{{ gamingPlace.name}}:
+                <br>
+                    {{gamingPlace.address.street}}, {{gamingPlace.address.number}} 
+                    <br>
+                    {{gamingPlace.address.postCode}} {{gamingPlace.address.city}}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="grid-item">
+        <div id="gamingPlacesMap" style="height: 500px; border: 2px solid black;"></div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('map')}}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('map')}}
+{% endblock %}
+

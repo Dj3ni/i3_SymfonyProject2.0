@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Register</h1>
+    </header>
+
+    {{ form_errors(registrationForm) }}
+
+    <div class="login-block">
+    {{ form_start(registrationForm) }}
+    <div class=" form-group">
+        {{ form_widget(registrationForm.firstName)}}
+    </div>
+        <hr class="hr-xs">
+        <div class="form-group ">
+            {{ form_widget(registrationForm.lastName) }}
+        <hr class="hr-xs">
+        <div class="form-group ">
+            {{ form_widget(registrationForm.phoneNumber) }}
+        </div>
+        <hr class="hr-xs">
+        <div class="form-group">
+            {{ form_widget(registrationForm.email) }}
+        </div>
+        <hr class="hr-xs">
+        <div class="form-group">
+            {{ form_widget(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+        </div>
+        <hr class="hr-xs">
+        <div class="input-group">
+            {{ form_row(registrationForm.avatarFile) }}
+        </div>
+
+        
+        <div class="input-group">
+            {{ form_widget(registrationForm.agreeTerms) }}
+        </div>
+
+    
+    {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

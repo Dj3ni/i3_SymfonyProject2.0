@@ -1,0 +1,22 @@
+.onglets-btn{
+    /* background-color: red; */
+    border : 0px;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 20px;
+}
+
+/* .tab-content{
+    margin-top: 15px;
+    border:2px solid;
+    padding: 15px;
+
+} */
+
+/* .mTop10{
+    margin-top: 10px;
+} */
+
+button.active {
+    background-color: black;
+    color: white;
+}

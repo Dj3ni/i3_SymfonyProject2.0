@@ -1,0 +1,58 @@
+/******************* Bootstrap cards *********************/
+
+.card-section{
+    max-width: 90%;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 15px;
+    height: 320px;
+    overflow: hidden;
+    width: 350px;
+}
+
+.card-text {
+    max-height: 100px;
+    overflow: hidden;          
+    text-overflow: ellipsis;
+}
+
+.card-link {
+    text-decoration: none;
+    color: #525252;
+    transition-duration: 0.5s;
+}
+
+.card-link:hover {
+    background: #1a1a1a;
+    padding: 5px;
+    border-radius: 20px;
+    color:#fff;
+}
+
+.card-title a {
+    text-decoration: none;
+    color: #1a1a1a;
+}
+.card-link-div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.card-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.card-type img {
+    max-width: 40px;
+    color: grey;
+    background-color: #fff;
+}

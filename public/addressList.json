@@ -1,0 +1,19 @@
+{
+    "Paris": {
+        "lat": 48.852969,
+        "lon": 2.349903,
+        "description": "Make love not war"
+    },
+
+    "Brest" :{
+        "lat":48.383,
+        "lon": -4.5,
+        "description": "Il n'y a pas de mauvais temps, que des mauvais vêtements!"
+    },
+
+    "Bruxelles" : {
+        "lat":50.8466,
+        "lon": 4.3528,
+        "description": "Best capital in the world"
+    }
+}

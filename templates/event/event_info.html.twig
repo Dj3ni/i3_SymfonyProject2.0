@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event infos{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
+
+<header>
+    <h1>
+        {{event.title}}
+    </h1>
+</header>
+
+<div>
+<h3>Practical informations</h3>
+
+    <div class="event-content">
+        <div class = "grid-item">
+            <div class="event-type">
+                <p>Type: {{event.eventType.value}}</p>
+                <img src="/images/{{event.eventType.value}}.png" alt="{{event.eventType.value}}">
+            </div>
+            <p>Recurrence: {{event.recurrenceType.value}}</p>
+            <p>Starts: {{event.dateStart | date("d/m/y H:i")}}</p>
+            <p>Ends: {{event.dateEnd | date("d/m/y H:i")}}</p>
+            <p>Fee: {{event.fee}}</p>
+            <p>Where:
+                <ul>
+                {% for place in places %}
+                    <li>{{place.gamingPlace.name}}:
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href=" {{ path("remove_gaming_place_event", {eventPlace: place.id, event: event.id})}}">❌</a>
+                        {% endif %}
+                        <br>
+                            {{place.gamingPlace.address.street}}, {{place.gamingPlace.address.number}}<br>
+                            {{place.gamingPlace.address.postCode}}  {{place.gamingPlace.address.city}}
+                        
+                    </li>
+                {% endfor %}
+                </ul> 
+                {% if is_granted('ROLE_ADMIN') %}
+                <button class = "btn btn-primary btn-block">
+                    <a href="{{ path('add_gamingPlace_event', {event: event.id})}}">➕ Add a new gaming place</a>
+                </button>
+                {% endif %}
+            </p>
+        </div>
+        <div class="grid-item">
+            <div id = "eventMap" style = "height:400px; border: 2px solid;" data-event = "{{event.id}}"></div>
+            {# <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2528.862994172178!2d4.577623377044335!3d50.66680427163423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c17e020a9f6973%3A0xd2e3266bb3f36b24!2sRue%20de%20la%20Chapelle%2C%201340%20Ottignies-Louvain-la-Neuve!5e0!3m2!1sfr!2sbe!4v1728986411142!5m2!1sfr!2sbe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> #}
+        </div>    
+    </div>
+
+    <h3>About the event</h3>
+    <div class = "event-description">
+        <p>{{event.description}}</p>
+
+        <div class="div-btn">
+            <button class ="btn btn-primary btn-block">
+                <a href="{{ path ('event_subscription', {id:event.id})}}" >Subscribe</a>
+            </button>
+            {% if is_granted("ROLE_ADMIN") %}
+                <button class="btn btn-primary btn-block">
+                    <a href="{{ path ('update_event', {id:event.id})}}">
+                        ✏️ Update this event
+                    </a>
+                </button>
+                <button class="btn btn-primary btn-block">
+                    <a href="{{ path ('delete_event', {id:event.id})}}">
+                        ❌ Delete this event
+                    </a>
+                </button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<br>
+
+    <h3>All the dates for this event</h3>
+<div class = "event-description">
+            {# {{ dump(occurrences) }} #}
+            {% if is_granted("ROLE_ADMIN") %}
+                <div class="div-btn">
+                    <button class="btn btn-primary btn-block">
+                        <a href="{{ path ("create_occurrence", {event: event.id})}}">➕ Add an occurrence</a>
+                    </button>
+                </div>
+            {% endif %}
+    <ul>
+        {% for occurrence in occurrences %}
+            {# {{dump(occurrence)}} #}
+            {# {{dump(occurrence.id)}} #}
+
+            {% if occurrence.dateStart >= "now"|date %}
+                <li>
+                    {# < href= "{{ path ("occurrence_show", {id: occurrences.id} )}}" class = "occurrence-link">#}
+                    {{ occurrence.dateStart|date('d-m-Y H:i') }} to {{ occurrence.dateEnd|date('d-m-Y H:i') }}
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <a href="{{ path ('delete_occurrence', {id:occurrence.id})}}"class="card-link">❌</a>
+                        <a href="{{ path ('update_occurrence', {id:occurrence.id})}}"class="card-link">✏️</a>
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('map')}}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('map')}}
+{% endblock %}

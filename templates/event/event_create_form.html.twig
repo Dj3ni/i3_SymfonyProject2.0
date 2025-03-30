@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Event{% endblock %}
+
+{% block body %}
+
+    <header>
+        <h1>Create a new Event</h1>
+    </header>
+
+    {{ form_errors(form) }}
+<div class="login-block">
+    {{ form_start(form) }}
+    <div class = "form-group">
+        <h1>Event Info</h1>
+
+        {{ form_widget(form.title) }}
+        <hr class="hr-xs"> 
+        {{ form_row(form.dateStart) }}
+        {{ form_row(form.dateEnd) }}
+        {{ form_row(form.recurrenceType) }}
+        {{ form_row(form.recurrenceEnd) }}
+        {{ form_row(form.eventType) }}
+        {{ form_row(form.fee)}}
+        {{ form_row(form.description) }}
+    </div>
+    {### <div class= "form-group">
+        <hr class="hr-xs">
+        <br> 
+        <h1>Gaming Places</h1>
+        {% for eventPlace in form.eventPlaces %}
+        choice between existing and new
+            <div> 
+                {{form_widget(eventPlace.gamingPlaceChoice)}}
+            </div>
+            select Gaming place
+            <div class = "gaming-place-existing" style="display:none;">
+                {{form_row(eventPlace.gamingPlace)}}
+            </div>
+            Create a new gaming place
+            <div class = "gaming-place-new" style="display:none;">
+                {{ form_widget(eventPlace.newGamingPlace.name)}}
+                {{ form_row(eventPlace.newGamingPlace.type)}}
+                {{ form_row(eventPlace.newGamingPlace.placeMax)}}
+                {{ form_widget(eventPlace.newGamingPlace.description)}}
+                <hr class="hr-xs">
+                <br>
+                <h1>Address</h1>
+                {{ form_widget(eventPlace.newGamingPlace.address.locality)}}
+                <hr class="hr-xs">
+                {{ form_widget(eventPlace.newGamingPlace.address.street)}}
+                <hr class="hr-xs">
+                {{ form_widget(eventPlace.newGamingPlace.address.number)}}
+                <hr class="hr-xs">
+                {{ form_widget(eventPlace.newGamingPlace.address.postCode)}}
+                <hr class="hr-xs">
+                {{ form_widget(eventPlace.newGamingPlace.address.city)}}
+                <hr class="hr-xs">
+                {{ form_widget(eventPlace.newGamingPlace.address.country)}}
+                <hr class="hr-xs">
+            </div>
+        {% endfor %} 
+    </div>####}
+        {{ form_widget (form.save)}}
+        <br>
+        {{form_end (form)}}
+    {# {{ form_end(form,{'render_rest': false}) }} #}
+</div>
+{% endblock %}
+
+{# {% block javascripts %}
+    {{parent()}}
+    {{encore_entry_script_tags ('eventForm')}}
+{% endblock %} #}
