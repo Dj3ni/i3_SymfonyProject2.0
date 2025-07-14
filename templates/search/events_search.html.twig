@@ -20,15 +20,12 @@
 </header>
 
 
-{# <div class="login-block"> #}
 <div class = "search-div-container">
     <div class = "search-div">
     {{ form_errors(form) }}
-        {# <h1>Search your events here</h1> #}
         {{ form_start(form, {"attr" : {"id": "SearchForm"}}) }}
         <img src="/images/loupe.png" alt="loupe" id = "SearchIcon">
         {{form_widget(form.search, {"attr" : {"id": "SearchInput"}})}}
-        
         {{ form_end(form) }}
     </div>
         <div class="search-links">
@@ -38,30 +35,43 @@
 </div>
 
 <div class="nav">
-    {# <p>Search by type: </p> #}
     <nav class="navbar">
+    <div class="type-search">
+            <a href="{{ path ('event_search')}}">All
+            </a>
+        </div>
         <div class="type-search">
-            <a href="{{ path ('search_type',{type: "tournament"})}}">Tournament
+            <a href="{{ path ('search_type',{type: "tournament"})}}"
+            class ="ajax-type-search"
+            >Tournament
                 <img src="/images/tournament.png" alt="tournament">
             </a>
         </div>
         <div class="type-search">
-            <a href="{{ path ('search_type',{type: "festival"})}}">Festival
+            <a href="{{ path ('search_type',{type: "festival"})}}"
+            class ="ajax-type-search"
+            >Festival
                 <img src="/images/festival.png" alt="festival">
             </a>
         </div>        
         <div class="type-search">
-            <a href="{{ path ('search_type',{type: "boardgames_demo"})}}">Boardgames Demo
+            <a href="{{ path ('search_type',{type: "boardgames_demo"})}}"
+            class ="ajax-type-search"
+            >Boardgames Demo
                 <img src="/images/boardgames_demo.png" alt="boardgames-demo">
             </a>
         </div>        
         <div class="type-search">
-            <a href="{{ path ('search_type',{type: "role_play"})}}">Role Play
+            <a href="{{ path ('search_type',{type: "role_play"})}}"
+            class ="ajax-type-search"
+            >Role Play
                 <img src="/images/role_play.png" alt="role-play">
             </a>
         </div>        
         <div class="type-search">
-            <a href="{{ path ('search_type',{type: "gaming_sales"})}}">Gaming Sales
+            <a href="{{ path ('search_type',{type: "gaming_sales"})}}"
+            class ="ajax-type-search"
+            >Gaming Sales
                 <img src="/images/gaming_sales.png" alt="gaming-sales">
             </a>
         </div>    
@@ -78,8 +88,6 @@
 <br>
 
 <div id ="SearchResult" class = "card-section">
-{# In controller: if no research put all the events #}
-    
     {% for event in events %}
         <div class="card" style="width: 18rem;">
             <div class="card-body">

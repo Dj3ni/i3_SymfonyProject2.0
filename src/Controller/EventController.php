@@ -222,5 +222,4 @@ class EventController extends AbstractController
             
         return new JsonResponse($addressData);
     }
-            
 }

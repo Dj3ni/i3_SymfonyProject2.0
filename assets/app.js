@@ -35,158 +35,131 @@ document.addEventListener("DOMContentLoaded",() => {
 /********************* Ajax Search Form ****************/ 
 
 const SEARCH_FORM = document.getElementById("SearchForm");
-const DIV_RESULT = document.getElementById("SearchResult");
-// console.log(SEARCH_FORM);
-// console.log(DIV_RESULT);
 
-// Listens to each modif on form's inputs, Ajax Search
 SEARCH_FORM.addEventListener("input", function(){
-    // console.log("Modify form");
 
     let formData = new FormData (SEARCH_FORM);
 
     axios.post("/events/search", formData)
         .then( response => {
-                // console.log(response);
-            // Clear previous response
-            DIV_RESULT.innerHTML = "";
-            // We don't need to parse the response, axios does it alone
-
-            let arrayEvents = response.data; //It's already an array
-
-            // I want to generate this html structure:
-
-            arrayEvents.forEach(event => {
-                console.log(event.eventType);
-                // Create card div
-                let cardDiv = document.createElement("div");
-                cardDiv.classList.add("card");
-                // cardDiv.style.width = "18rem";
-
-                // Create Card Body
-                let cardBody = document.createElement("div");
-                cardBody.classList.add("card-body")
-
-                // Title with link and add it to card body
-                let cardTitle = document.createElement("h5");
-                cardTitle.classList.add("card-title");
-                let titleLink = document.createElement("a");
-                titleLink.href = `/event/${event.id}`;
-                titleLink.textContent = event.title
-                cardTitle.appendChild(titleLink);
-                cardBody.appendChild(cardTitle);
-
-                // Event Type + image
-                let cardTypeDiv = document.createElement("div");
-                cardTypeDiv.classList.add("card-type");
-
-                let cardEventType = document.createElement("h6")
-                cardEventType.classList.add("card-subtitle", "mb-2", "text-body-secondary");
-                cardEventType.textContent = event.eventType;
-                let cardTypeImage = document.createElement("img");
-                cardTypeImage.src = `/images/${event.eventType}.png`;
-                cardTypeImage.alt = event.eventType;
-
-                cardTypeDiv.appendChild(cardEventType);
-                cardTypeDiv.appendChild(cardTypeImage);
-                cardBody.appendChild(cardTypeDiv);
-
-                // Horizontal rule
-                let hr = document.createElement("hr");
-                hr.classList.add("hr-xs");
-                cardBody.appendChild(hr);
-
-                // Card Text
-                let cardText = document.createElement("p");
-                cardText.classList.add("card-text");
-                cardText.textContent = event.description;
-                cardBody.appendChild(cardText);
-
-                // Card links section
-                let cardLinkDiv = document.createElement("div");
-                cardLinkDiv.classList.add("card-link-div");
-
-                let moreInfoLink = document.createElement("a");
-                moreInfoLink.href = `/event/${event.id}`;
-                moreInfoLink.classList.add("card-link");
-                moreInfoLink.textContent = "More info";
-
-                let subscribeLink = document.createElement("a");
-                subscribeLink.href = `/event_subscription/${event.id}`;
-                subscribeLink.classList.add("card-link");
-                subscribeLink.textContent = "Subscribe";
-
-                cardLinkDiv.appendChild(moreInfoLink);
-                cardLinkDiv.appendChild(subscribeLink);
-                // Admin control
-                if (event.isAdmin) { 
-                    let editLink = document.createElement("a");
-                    editLink.href = `/update_event/${event.id}`;
-                    editLink.classList.add("card-link");
-                    editLink.textContent = "✏️";
-
-                    let deleteLink = document.createElement("a");
-                    deleteLink.href = `/delete_event/${event.id}`;
-                    deleteLink.classList.add("card-link");
-                    deleteLink.textContent = "❌";
-
-                    cardLinkDiv.appendChild(editLink);
-                    cardLinkDiv.appendChild(deleteLink);
-                }
-
-                cardBody.appendChild(cardLinkDiv);
-                cardDiv.appendChild(cardBody);
-
-                // Append all elements to the result
-                DIV_RESULT.appendChild(cardDiv);
-            });
+            renderEventCard(response.data, '#SearchResult')
         })
         .catch(error => {
             console.error("Error fetching events:", error);
         });
-
-        // For debug
-        // let ul = document.createElement("ul");
-        
-        // for(let element of arrayEvents){
-        //     // console.log(element);
-        //     let li = document.createElement("li");
-        //     li.innerHTML = element.title;
-        //     ul.appendChild(li);
-        // }
-        // DIV_RESULT.appendChild(ul);
     })
-    
 
-// // Handling the submit event, prevent reload and manage search
-// SEARCH_FORM.addEventListener("submit", function(event){
-//     event.preventDefault(); 
-//     const SEARCH_INPUT = document.getElementById("SearchInput");
-//     let query = SEARCH_INPUT.value;
+document.querySelectorAll('.ajax-type-search').forEach(link =>{
+    link.addEventListener('click',function(e){
+        e.preventDefault();
+        const url = this.getAttribute('href');
 
-//     if(query.lenght > 0){
-//         // Redirect to page with results
-//         window.location.href = "/event/events_show.html.twig" + JSON.encode(query);
-//     }
+        axios.get(url,{
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response =>{
+            renderEventCard(response.data, '#SearchResult')
+        })
+        .catch(error => {
+            console.error("Error fetching events:", error);
+        });
+    })
+})
 
-// })
+function renderEventCard(arrayEvents, containerSelector ='#SearchResult'){
+    const container = document.querySelector(containerSelector);
 
-/********************* Google Map *******************/ 
-const loadGoogleMapsApi = require('load-google-maps-api');class Map {
+    // Clear previous response
+    container.innerHTML = "";
 
-static loadGoogleMapsApi() {
-    return loadGoogleMapsApi({ key: process.env.GOOGLEMAPS_KEY });
-}  static createMap(googleMaps, mapElement) {
-    return new googleMaps.Map(mapElement, {
-    center: { lat: 45.520562, lng: -122.677438 },
-    zoom: 14
+    arrayEvents.forEach(event => {
+
+        // Create card div
+        let cardDiv = document.createElement("div");
+        cardDiv.classList.add("card");
+
+        // Create Card Body
+        let cardBody = document.createElement("div");
+        cardBody.classList.add("card-body")
+
+        // Title with link and add it to card body
+        let cardTitle = document.createElement("h5");
+        cardTitle.classList.add("card-title");
+
+        let titleLink = document.createElement("a");
+        titleLink.href = `/event/${event.id}`;
+        titleLink.textContent = event.title
+
+        cardTitle.appendChild(titleLink);
+        cardBody.appendChild(cardTitle);
+
+        // Event Type + image
+        let cardTypeDiv = document.createElement("div");
+        cardTypeDiv.classList.add("card-type");
+
+        let cardEventType = document.createElement("h6")
+        cardEventType.classList.add("card-subtitle", "mb-2", "text-body-secondary");
+        cardEventType.textContent = event.eventType;
+
+        let cardTypeImage = document.createElement("img");
+        cardTypeImage.src = `/images/${event.eventType}.png`;
+        cardTypeImage.alt = event.eventType;
+
+        cardTypeDiv.appendChild(cardEventType);
+        cardTypeDiv.appendChild(cardTypeImage);
+        cardBody.appendChild(cardTypeDiv);
+
+        // Horizontal rule
+        let hr = document.createElement("hr");
+        hr.classList.add("hr-xs");
+        cardBody.appendChild(hr);
+
+        // Card Text
+        let cardText = document.createElement("p");
+        cardText.classList.add("card-text");
+        cardText.textContent = event.description;
+        cardBody.appendChild(cardText);
+
+        // Card links section
+        let cardLinkDiv = document.createElement("div");
+        cardLinkDiv.classList.add("card-link-div");
+
+        let moreInfoLink = document.createElement("a");
+        moreInfoLink.href = `/event/${event.id}`;
+        moreInfoLink.classList.add("card-link");
+        moreInfoLink.textContent = "More info";
+
+        let subscribeLink = document.createElement("a");
+        subscribeLink.href = `/event_subscription/${event.id}`;
+        subscribeLink.classList.add("card-link");
+        subscribeLink.textContent = "Subscribe";
+
+        cardLinkDiv.appendChild(moreInfoLink);
+        cardLinkDiv.appendChild(subscribeLink);
+
+        // Admin control
+        if (event.isAdmin) { 
+            let editLink = document.createElement("a");
+            editLink.href = `/update_event/${event.id}`;
+            editLink.classList.add("card-link");
+            editLink.textContent = "✏️";
+
+            let deleteLink = document.createElement("a");
+            deleteLink.href = `/delete_event/${event.id}`;
+            deleteLink.classList.add("card-link");
+            deleteLink.textContent = "❌";
+
+            cardLinkDiv.appendChild(editLink);
+            cardLinkDiv.appendChild(deleteLink);
+        }
+
+        cardBody.appendChild(cardLinkDiv);
+        cardDiv.appendChild(cardBody);
+
+        // Append all elements to the result
+        container.appendChild(cardDiv);
     });
-}
-}export { Map };
 
-document.addEventListener("DOMContentLoaded", function() {
-    let mapElement = document.getElementById('map');
-    
-    Map.loadGoogleMapsApi().then(function(googleMaps) {
-    Map.createMap(googleMaps, mapElement);
-    });});
+}

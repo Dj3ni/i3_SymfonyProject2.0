@@ -33,28 +33,21 @@ class SearchController extends AbstractController
         SerializerInterface $serializerInterface): Response
     {
         $form = $this->createForm(SearchFormType::class);
-        // dd($form);
         $form->handleRequest($req);
         
         if($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
-            // dd($data);
             $events = $rep->findEventByTitles($data);
             $eventsJson = $serializerInterface->serialize ($events,"json", [
                 AbstractNormalizer::IGNORED_ATTRIBUTES => ["subscriptions","eventPlaces","userOrganisator", "occurrences"],
             ]);
             return new Response($eventsJson);
-            // return $this->render('search/events_show.html.twig', [
-            //     "events" => $events,
-            //     "eventsJson" => $eventsJson,
-            // ]); ;
         }
         else {
             $events = $rep->findAll();
             $eventsJson = $serializerInterface->serialize ($events,"json", [
                 AbstractNormalizer::IGNORED_ATTRIBUTES => ["subscriptions","eventPlaces","userOrganisator", "occurrences"]
             ]);
-            // dd($eventsJson);
             
             return $this->render('search/events_search.html.twig', [
                 'form' => $form,
@@ -62,6 +55,28 @@ class SearchController extends AbstractController
                 "eventsJson" => $eventsJson,
             ]);
         }
+    }
+
+    #[Route("/search/{type}", name: "search_type")]
+    public function searchByType(
+        EventType $type, 
+        EventRepository $rep,
+        SerializerInterface $serializerInterface) : Response
+    {
+        $events = $rep->findByType($type);
+        $eventsJson = $serializerInterface->serialize(
+            $events, 
+            "json",
+            [
+                AbstractNormalizer::IGNORED_ATTRIBUTES =>[
+
+                ]
+            ]);
+            return new Response ($eventsJson);
+
+        // return $this->render("event/events_show.html.twig", [
+        //     "events"=> $events,
+        // ]);
     }
 
     #[Route("events/calendar", name: "calendar")]
@@ -85,7 +100,6 @@ class SearchController extends AbstractController
             // ]);
             $occurrencesJson = json_encode($allOccurrences);
             
-            // dd($eventsJson);
         return $this->render("search/events_calendar.html.twig", [
                 "events" => $events,
                 // "eventsJson" => $eventsJson,
@@ -108,21 +122,10 @@ class SearchController extends AbstractController
         ]);
     }
 
-    #[Route("/search/{type}", name: "search_type")]
-    public function searchByType(EventType $type, EventRepository $rep){
-        
-        $events = $rep->findByType($type);
-
-        return $this->render("event/events_show.html.twig", [
-            "events"=> $events,
-        ]);
-    }
-
     #[Route('/gamingplaces/addresses', name:'gamingPlaces_address_list', methods:['GET'])]
     public function addressList(GamingPlaceRepository $rep):JsonResponse
     {
         $gamingPlaces = $rep->findAll();
-        // dd($gamingPlaces);
         $addressData = [];
         foreach ($gamingPlaces as $gamingPlace){
             $address = $gamingPlace->getAddress();
@@ -133,7 +136,6 @@ class SearchController extends AbstractController
                 "lon"=>$address->getLon(),
             ];
 
-            // dd($address);
         }
         return new JsonResponse($addressData);
     }
@@ -142,13 +144,11 @@ class SearchController extends AbstractController
     public function EventsAddressList(EventRepository $rep):JsonResponse
     {
         $events = $rep->findAll();
-        // dd($gamingPlaces);
         $addressData = [];
         foreach ($events as $event){
             $eventPlaces = $event->getEventPlaces();
             foreach($eventPlaces as $eventPlace){
                 $address = $eventPlace->getGamingPlace()->getAddress();
-                // dd($address);
                 $addressData[] = [
                     "eventTitle" => $event->getTitle(),
                     "name"=>$eventPlace->getGamingPlace()->getName(),
